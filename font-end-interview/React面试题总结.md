@@ -1,7 +1,7 @@
 ES6
 
 
-## 什么是reat
+## 什么是react
 react 网页UI框架，通过组件化的方式解决视图层面开发复用的问题，本质是一个组件化框架，它的核心设计思路有三点，分别是声明式/组件化与通用性。
 1. 声明式的优势在于直观与组合
 2. 组件化的优势在于视图的拆分与模块复用，可以更容易做到高内聚低耦合。
@@ -34,18 +34,42 @@ React 的 JSX 会被 Babel 的 @babel/plugin-transform-react-jsx 插件转换成
 
 ## 生命周期
 
-constructor()
 
-getDeriverStateProps()
-props state forceUpdate 被调用时候
+#### 挂载阶段
+1. constructor()
+>在 React 组件挂载之前，会调用它的构造函数
 
-unsafe_compenentWillMount
+2. getDeriverStateProps()
+>getDerivedStateFromProps 会在调用 render 方法之前调用，并且在初始挂载及后续更新时都会被调用，它应返回一个对象来更新 state.(这里是静态方法，代表你不能访问 this，使得 getDerivedStateFromProps 这个函数强迫变成一个纯函数，逻辑也相对简单，就没那么多错误了)
 
-Render()
+3. Render()
+>渲染函数 render() 被调用
 
-componentDidMount() 组建完成
-
+4. componentDidMount() 组建完成
+>会在组件挂载后（插入 DOM 树中)立即调用。依赖于 DOM 节点的初始化应该放在这里。如需通过网络请求获取数据，此处是实例化请求的好地方
 getDerivedStateFromProps
+
+#### 更新阶段
+1. static getDerivedStateFromProps()
+2. shouldComponentUpdate()
+ >根据 shouldComponentUpdate() 的返回值，判断 React 组件是否受当前 state 或 props 更改的影响。默认父组件的 state 或 prop 更新时，无论子组件的 state、prop 是否更新，都会触发子组件的更新，这会形成很多没必要的 render，浪费很多性能，使用 shouldComponentUpdate 可以优化掉不必要的更新
+3. render()
+4. getSnapshotBeforeUpdate()
+>getSnapshotBeforeUpdate() 在最近一次渲染输出（提交到 DOM 节点）之前调用。它使得组件能在发生更改之前从 DOM 中捕获一些信息（例如，滚动位置）。此生命周期的任何返回值将作为参数传递给 componentDidUpdate()
+5. componentDidUpdate()
+componentDidUpdate() 会在更新后会被立即调用。
+
+#### 卸载阶段
+1. componentWillUnmount()
+    >会在组件卸载及销毁之前直接调用。在此方法中执行必要的清理操作，例如，清除 timer 等。
+
+#### 错误处理
+1. static getDerivedStateFromError()
+    >此生命周期会在后代组件抛出错误后被调用。 它将抛出的错误作为参数，并返回一个值以更新 state
+2. componentDidCatch()
+    >此生命周期在后代组件抛出错误后被调用.    
+
+
 
 ### 什么情况下会重新渲染
 
@@ -176,3 +200,7 @@ componentWillMount:已被标记废弃，在新的异步渲染架构下会触发�
 
 
 
+# useState工作的过程?
+>1. 首次调用函数组件，执行useState，React获取到当前正在遍历的节点，创建_state对象挂载到节点上，根据调用useState的顺序，在数组中加入状态，并根据传入的初始值初始化状态。
+> 2. 当调用状态的set方法时候，React修改_state上面的状态，并更新相应的组件
+> 3. 后面再调用函数组件时候，useState找到对应的节点的_state，并根据useState的调用顺序，找到修改后的状态返回，这样组件就可以拿到正确的状态

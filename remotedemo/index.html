@@ -71,16 +71,34 @@
         .item:nth-child(5) {
             grid-area: E;
         }
+        
+        .content {
+            width: 30%;
+            padding: 20px;
+            background-color: aquamarine;
+        }
+        
+        .inner {
+            width: 100%;
+            /* 让高度是宽度的75% */
+            padding-bottom: 75%;
+            /* height: 200px; */
+            background: darkcyan;
+        }
     </style>
 </head>
 
 <body>
-    <div class="container">
+    <!-- <div class="container">
         <div class="item"><img src="https://picsum.photos/id/548/600/400" alt=""></div>
         <div class="item"><img src="https://picsum.photos/id/684/600/400" alt=""></div>
         <div class="item"><img src="https://picsum.photos/id/1025/600/400" alt=""></div>
         <div class="item"><img src="https://picsum.photos/id/598/600/400" alt=""></div>
         <div class="item"><img src="https://picsum.photos/id/1076/600/400" alt=""></div>
+    </div> -->
+
+    <div class="content">
+        <div class="inner"></div>
     </div>
 
 </body>

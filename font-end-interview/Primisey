@@ -1,0 +1,3 @@
+> promise 与 async 区别？
+> async和promise都是异步方法，区别是async生成的结果是promise对象，async是promise的终结版。await只能在async中使用，await是阻塞的意思，就是暂停，你一起调用2个接口，第一个执行完，不输出结果，要等第二个接口执行完，才返回这两个的结果。
+  使用async/await并不需要回调嵌套，也不需要写多个then方法，在使用上甚至类似一个同步操作。
