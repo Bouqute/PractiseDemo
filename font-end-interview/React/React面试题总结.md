@@ -47,6 +47,8 @@ React 的 JSX 会被 Babel 的 @babel/plugin-transform-react-jsx 插件转换成
 
 4. componentDidMount() 组建完成
 >会在组件挂载后（插入 DOM 树中)立即调用。依赖于 DOM 节点的初始化应该放在这里。如需通过网络请求获取数据，此处是实例化请求的好地方
+
+
 getDerivedStateFromProps
 
 #### 更新阶段
@@ -71,7 +73,7 @@ componentDidUpdate() 会在更新后会被立即调用。
 
 
 
-### 什么情况下会重新渲染
+## 什么情况下会重新渲染？
 
 #### 函数组建
 函数组建任何情况下都会重新渲染。
@@ -116,13 +118,14 @@ componentWillMount:已被标记废弃，在新的异步渲染架构下会触发�
 
 3.React 中有三种构建组件的方式
 >函数式创建
-通过React.createClass 方法创建
-继承React.Component 创建   
+>通过React.createClass 方法创建
+>继承React.Component 创建   
+
 4.调用 setState 之后发生了什么？
 > React 会重新渲染组件，并根据新的状态重新计算组件的视图
 
 
-5.react diff 原理（常考，大厂必考）
+5. react diff 原理（常考，大厂必考）
 > 概念： 需要遍历整棵树的节点然后进行比较，是一个深度递归的过程
 > react diff 优化策略？
 > 1. DOM节点跨层级的操作不做优化，因为很少这么做，这是针对的tree层级的策略；
@@ -130,16 +133,16 @@ componentWillMount:已被标记废弃，在新的异步渲染架构下会触发�
 > 对于同一级的子节点，拥有同层唯一的key值，来做删除、插入、移动的操作，这是针对element层级的策略；
 
 
-6.为什么建议传递给 setState 的参数是一个 callback 而不是一个对象？
+6. 为什么建议传递给 setState 的参数是一个 callback 而不是一个对象？
 > 因为props和state可能会异步更新，也就是说，对相同的变量进行处理的时候，会将这多次处理合并为一个，这个是批处理；而如果传入函数，那么会进行链式调用，这个函数会被react加入到一个执行队列中，函数中的代码会依次执行。
 
 
-7.除了在构造函数中绑定 this，还有其它方式吗？
+7. 除了在构造函数中绑定 this，还有其它方式吗？
 > 1. 函数定义的时候使用箭头函数
 > 2. 函数调用是使用bind绑定this 
 
 
-8.setState第二个参数的作用？
+8. setState第二个参数的作用？
 >第二个参数是一个回调函数，在setState的异步操作结束并且组件已经重新渲染的时候执行。也就是说，我们可以通过这个回调来拿到更新的state的值。
 
 9.(在构造函数中)调用 super(props) 的目的是什么 ?
